@@ -1,0 +1,28 @@
+package rules.hello
+import com.sheliming.drools.Person
+
+rule "规则1"
+    when
+    then
+        System.out.println("匹配规则1");
+    end
+
+rule "规则2"
+    when
+    then
+        System.out.println("匹配规则2");
+    end
+
+
+rule "规则3"
+    when
+    then
+        System.out.println("匹配规则3");
+    end
+
+
+rule "规则4"
+    when
+    then
+        System.out.println("匹配规则4");
+    end

@@ -1,4 +1,4 @@
-package rules
+package rules.hello
 import com.sheliming.drools.Person
 
 rule "ageLower18"

@@ -2,7 +2,15 @@
 <kmodule xmlns="http://www.drools.org/xsd/kmodule">
     <!--kmodule中可以包含一个或多个kbase,分别对应drl的规则文件-->
     <!--packages为drl文件所在resource目录下的路径-->
-    <kbase name="rules" packages="rules">
-        <ksession name="rules_ksession"/>
+    <kbase name="hello" packages="rules.hello">
+        <ksession name="hello_ksession"/>
+    </kbase>
+
+    <kbase name="firemax" packages="rules.firemax">
+        <ksession name="firemax_ksession"/>
+    </kbase>
+
+    <kbase name="source" packages="rules.source">
+        <ksession name="source_ksession"/>
     </kbase>
 </kmodule>
