@@ -1,0 +1,23 @@
+package rules.list
+
+import java.util.List
+import java.util.Map
+import com.sheliming.drools.Person
+
+
+rule "rule1"
+    when
+        $list:List()
+        $person:Person(age > 18) from $list
+    then
+        System.out.println($list);
+        System.out.println($person);
+    end
+
+rule "rule2"
+    when
+        $map:Map($key:keySet())
+    then
+        System.out.println($map);
+        System.out.println($key);
+    end

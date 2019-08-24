@@ -1,0 +1,22 @@
+package rules.group
+
+rule "rule1"
+agenda-group "group1"
+    when
+    then
+        System.out.println("rule1");
+    end
+
+rule "rule2"
+agenda-group "group1"
+    when
+    then
+        System.out.println("rule2");
+    end
+
+rule "rule3"
+agenda-group "group2"
+    when
+    then
+        System.out.println("rule3");
+    end

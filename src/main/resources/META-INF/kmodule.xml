@@ -13,4 +13,16 @@
     <kbase name="source" packages="rules.source">
         <ksession name="source_ksession"/>
     </kbase>
+
+    <kbase name="stateless" packages="rules.stateless">
+        <ksession name="stateless_ksession" type="stateless"/>
+    </kbase>
+
+    <kbase name="group" packages="rules.group">
+        <ksession name="group_ksession"/>
+    </kbase>
+
+    <kbase name="list" packages="rules.list">
+        <ksession name="list_ksession"/>
+    </kbase>
 </kmodule>
