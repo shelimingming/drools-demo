@@ -1,13 +1,16 @@
 package com.sheliming.drools.dynamic;
 
+import com.sheliming.drools.Person;
 import org.kie.api.KieServices;
-import org.kie.api.builder.KieFileSystem;
-import org.kie.api.builder.ReleaseId;
+import org.kie.api.builder.*;
 import org.kie.api.builder.model.KieBaseModel;
 import org.kie.api.builder.model.KieModuleModel;
 import org.kie.api.builder.model.KieSessionModel;
 import org.kie.api.conf.EqualityBehaviorOption;
 import org.kie.api.conf.EventProcessingOption;
+import org.kie.api.runtime.KieContainer;
+import org.kie.api.runtime.KieSession;
+import org.kie.internal.io.ResourceFactory;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -21,13 +24,13 @@ public class KmoduleTest {
         KieServices kieServices = KieServices.Factory.get();
         KieModuleModel kieModuleModel = kieServices.newKieModuleModel();
 
-        KieBaseModel kieBaseModel = kieModuleModel.newKieBaseModel("kbase_name")
-                .addPackage("rules.dynamic")
+        KieBaseModel kieBaseModel = kieModuleModel.newKieBaseModel("hello")
+                .addPackage("rules.hello")
                 .setDefault(true)
                 .setEqualsBehavior(EqualityBehaviorOption.EQUALITY)
                 .setEventProcessingMode(EventProcessingOption.STREAM);
 
-        KieSessionModel kieSessionModel = kieBaseModel.newKieSessionModel("ksession_name")
+        KieSessionModel kieSessionModel = kieBaseModel.newKieSessionModel("hello_ksession")
                 .setDefault(true)
                 .setType(KieSessionModel.KieSessionType.STATEFUL);
 
@@ -41,7 +44,23 @@ public class KmoduleTest {
         kieFileSystem.generateAndWritePomXML(releaseId);
 
 
-        getRuleFiles();
+//        getRuleFiles();
+        kieFileSystem.write("src/main/resources/person.drl", ResourceFactory.newClassPathResource("rules/hello/person.drl", "utf-8"));
+
+        KieBuilder kieBuilder = kieServices.newKieBuilder(kieFileSystem);
+        KieModule kieModule = kieBuilder.getKieModule();
+        System.out.println(kieModule);
+
+        KieRepository repository = kieServices.getRepository();
+        repository.addKieModule(kieModule);
+        KieContainer kieContainer = kieServices.newKieContainer(releaseId);
+        KieSession kieSession = kieContainer.newKieSession();
+
+
+        kieSession.insert(new Person("小明", 12));
+        int i = kieSession.fireAllRules();
+        System.out.println("规则数：" + i);
+
     }
 
     public static List<File> getRuleFiles() throws UnsupportedEncodingException {
