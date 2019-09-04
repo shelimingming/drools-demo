@@ -14,3 +14,9 @@ rule "ageUper18"
     then
         System.out.println($person.getName()+"已成年");
     end
+
+rule "none"
+    when
+    then
+        System.out.println("none被触发");
+    end
