@@ -1,4 +1,4 @@
-package rules.hello
+package rules.firemax
 import com.sheliming.drools.Person
 
 rule "规则1"
